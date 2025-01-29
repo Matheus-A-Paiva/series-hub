@@ -14,6 +14,64 @@ class TMDBService{
         $this->apiKey = env('TMDB_API_KEY');
     }
 
+    public function getPopularSeries()
+    {
+        $response = Http::get("{$this->baseUrl}/tv/popular", $this->getHeaders());
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        $this->handleResponseError($response);
+    }
+
+    public function getSerieById($serieId)
+    {
+        $response = Http::get("{$this->baseUrl}/tv/{$serieId}", $this->getHeaders());
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        $this->handleResponseError($response);
+    }
+
+    public function searchSeriesByName($query)
+    {
+        $headerData = ['query' => $query];
+        $response = Http::get("{$this->baseUrl}/search/tv", $this->getHeaders($headerData));
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        $this->handleResponseError($response);
+    }
+
+    public function getAllGenres()
+    {
+        $response = Http::get("{$this->baseUrl}/genre/tv/list", $this->getHeaders());
+
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        $this->handleResponseError($response);
+    }
+
+    public function searchSeriesByGenre($genre)
+    {
+        $headerData = ['with_genres' => $genre];
+        $response = Http::get("{$this->baseUrl}/discover/tv", $this->getHeaders($headerData));
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        $this->handleResponseError($response);
+    }
+
     private function getHeaders($headerData = []){
         if (!empty($headerData)){
             return array_merge($headerData, [
@@ -27,75 +85,11 @@ class TMDBService{
         ];
     }
 
-    public function getPopularSeries()
+    private function handleResponseError($response)
     {
-        $response = Http::get("{$this->baseUrl}/tv/popular", $this->getHeaders());
-
-        if ($response->successful()) {
-            return $response->json();
-        }
         $message = $response->json()['status_message'] ?? 'Unknown error';
         $status = $response->status();
 
-        throw new Exception($message, $status);
-    }
-
-    public function getSerieById($serieId)
-    {
-        $response = Http::get("{$this->baseUrl}/tv/{$serieId}", $this->getHeaders());
-
-        if ($response->successful()) {
-            return $response->json();
-        }
-
-        $message = $response->json()['status_message'] ?? 'Unknown error';
-        $status = $response->status();
-
-        throw new Exception($message, $status);
-    }
-
-    public function searchSeriesByName($query)
-    {
-        $headerData = ['query' => $query];
-        $response = Http::get("{$this->baseUrl}/search/tv", $this->getHeaders($headerData));
-
-        if ($response->successful()) {
-            return $response->json();
-        }
-
-        $message = $response->json()['status_message'] ?? 'Unknown error';
-        $status = $response->status();
-
-        throw new Exception($message, $status);
-
-    }
-
-    public function getAllGenres()
-    {
-        $response = Http::get("{$this->baseUrl}/genre/tv/list", $this->getHeaders());
-
-        if ($response->successful()) {
-            return $response->json();
-        }
-
-        $message = $response->json()['status_message'] ?? 'Unknown error';
-        $status = $response->status();
-
-        throw new Exception($message, $status);
-
-    }
-
-    public function searchSeriesByGenre($genre)
-    {
-        $headerData = ['with_genres' => $genre];
-        $response = Http::get("{$this->baseUrl}/discover/tv", $this->getHeaders($headerData));
-
-        if ($response->successful()) {
-            return $response->json();
-        }
-
-        $message = $response->json()['status_message'] ?? 'Unknown error';
-        $status = $response->status();
         throw new Exception($message, $status);
     }
 
