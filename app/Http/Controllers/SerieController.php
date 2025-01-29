@@ -33,7 +33,7 @@ class SerieController extends Controller
         try{
             $serieDetail = $this->tmdbService->getSerieById($serieId);
 
-            return response()->json([$serieDetail], 200);
+            return response()->json($serieDetail, 200);
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),
@@ -43,6 +43,7 @@ class SerieController extends Controller
 
     public function searchSeriesByGenre(Request $request)
     {
+
         try{
             $response = $this->tmdbService->searchSeriesByGenre($request->get('with_genres'));
             return response()->json([$response], 200);
