@@ -22,7 +22,7 @@ class SerieControllerUnitTest extends TestCase
         $this->controller = new SerieController($this->tmbdServiceMock);
     }
 
-    public function test_index_returns_popular_series()
+    public function test_index_returns_top_rated_series()
     {
         $mockResponse = [['id'=>1, 'name'=> 'Breaking Bad']];
 
@@ -31,7 +31,8 @@ class SerieControllerUnitTest extends TestCase
             ->once()
             ->andReturn($mockResponse);
 
-        $response = $this->controller->index();
+        $request = new Request(['page'=>1]);
+        $response = $this->controller->index($request);
 
         $responseData = json_decode($response->getContent(), true);
 
@@ -79,14 +80,15 @@ class SerieControllerUnitTest extends TestCase
 
     public function test_search_series_returns_correct_data()
     {
-        $mockResponse = [['id'=>1, 'name'=> 'Breaking Bad']];
+        $mockResponse = [['id' => 1, 'name' => 'Breaking Bad']];
 
         $this->tmbdServiceMock
             ->shouldReceive('searchSeriesByName')
-            ->with('breaking bad')
+            ->with('breaking bad', 1)
             ->once()
             ->andReturn($mockResponse);
-        $request = new Request(['query'=> 'breaking bad']);
+
+        $request = new Request(['query' => 'breaking bad', 'page' => 1]);
 
         $response = $this->controller->searchSeries($request);
         $responseData = json_decode($response->getContent(), true);
