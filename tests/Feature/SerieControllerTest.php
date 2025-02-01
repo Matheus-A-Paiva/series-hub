@@ -9,7 +9,7 @@ use Tests\TestCase;
 class SerieControllerTest extends TestCase
 {
 
-    public function test_get_popular_series(): void
+    public function test_top_rated_series(): void
     {
         $response = $this->getJson('api/series');
 

@@ -15,11 +15,12 @@ class SerieController extends Controller
     {
         $this->tmdbService = $tmdbService;
     }
-    public function index()
+    public function index(Request $request)
     {
         try{
-            $popularSeries = $this->tmdbService->getPopularSeries();
-            return response()->json([$popularSeries], 200);
+            $page = $request->query('page', 1);
+            $topRatedSeries = $this->tmdbService->getTopRatedSeries($page);
+            return response()->json([$topRatedSeries], 200);
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),
@@ -45,7 +46,9 @@ class SerieController extends Controller
     {
 
         try{
-            $response = $this->tmdbService->searchSeriesByGenre($request->get('with_genres'));
+            $page = $request->query('page', 1);
+            $genres = $request->query('with_genres');
+            $response = $this->tmdbService->searchSeriesByGenre($genres, $page);
             return response()->json([$response], 200);
         } catch (Exception $e) {
             return response()->json([$e->getMessage()], $e->getCode());
@@ -56,7 +59,9 @@ class SerieController extends Controller
     {
 
         try{
-            $response = $this->tmdbService->searchSeriesByName($request->get('query'));
+            $page = $request->query('page', 1);
+            $query = $request->query('query');
+            $response = $this->tmdbService->searchSeriesByName($query, $page);
 
             return response()->json([$response], 200);
         } catch (Exception $e) {

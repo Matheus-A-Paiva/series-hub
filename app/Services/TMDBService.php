@@ -14,9 +14,10 @@ class TMDBService{
         $this->apiKey = env('TMDB_API_KEY');
     }
 
-    public function getPopularSeries()
+    public function getTopRatedSeries($page)
     {
-        $response = Http::get("{$this->baseUrl}/tv/popular", $this->getHeaders());
+        $headerData = ['page' => $page];
+        $response = Http::get("{$this->baseUrl}/tv/top_rated", $this->getHeaders($headerData));
 
         if ($response->successful()) {
             return $response->json();
@@ -36,9 +37,12 @@ class TMDBService{
         $this->handleResponseError($response);
     }
 
-    public function searchSeriesByName($query)
+    public function searchSeriesByName($query, $page)
     {
-        $headerData = ['query' => $query];
+        $headerData = [
+            'query' => $query,
+            'page' => $page
+        ];
         $response = Http::get("{$this->baseUrl}/search/tv", $this->getHeaders($headerData));
 
         if ($response->successful()) {
@@ -60,9 +64,17 @@ class TMDBService{
         $this->handleResponseError($response);
     }
 
-    public function searchSeriesByGenre($genre)
+    public function searchSeriesByGenre($genre, $page)
     {
-        $headerData = ['with_genres' => $genre];
+        $headerData = [
+            'with_genres' => $genre,
+            'sort_by' => 'vote_average.desc',
+            'vote_average.gte' => 6,
+            'vote_count.gte' => 100,
+            'page' => $page,
+            'language' => 'en-US',
+
+        ];
         $response = Http::get("{$this->baseUrl}/discover/tv", $this->getHeaders($headerData));
 
         if ($response->successful()) {

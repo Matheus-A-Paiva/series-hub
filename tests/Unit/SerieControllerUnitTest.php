@@ -27,7 +27,7 @@ class SerieControllerUnitTest extends TestCase
         $mockResponse = [['id'=>1, 'name'=> 'Breaking Bad']];
 
         $this->tmbdServiceMock
-            ->shouldReceive('getPopularSeries')
+            ->shouldReceive('getTopRatedSeries')
             ->once()
             ->andReturn($mockResponse);
 
