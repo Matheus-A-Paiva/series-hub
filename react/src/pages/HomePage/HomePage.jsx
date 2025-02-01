@@ -68,7 +68,7 @@ const HomePage = () => {
                 setCurrentPage={setCurrentPage}
                 onSelectGenre={handleGenreChange}
             />
-            <Footer
+            <Footer/>
         </div>
     );
 };
