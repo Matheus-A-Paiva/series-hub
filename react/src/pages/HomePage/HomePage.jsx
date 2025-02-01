@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header/Header.jsx";
 import Home from "../../components/Home/Home.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
 import { fetchSeries, fetchSeriesByGenre, fetchSearchSeries } from "../../services/api.js";
 
 const HomePage = () => {
@@ -67,6 +68,7 @@ const HomePage = () => {
                 setCurrentPage={setCurrentPage}
                 onSelectGenre={handleGenreChange}
             />
+            <Footer
         </div>
     );
 };
