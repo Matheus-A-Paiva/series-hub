@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./GenreFilter.css";
 
 const popularGenres = [
@@ -9,8 +10,11 @@ const popularGenres = [
 ];
 
 const GenreFilter = ({ onSelectGenre }) => {
+    const [selectedGenre, setSelectedGenre] = useState(null);
+
     const handleGenreClick = (genreId) => {
-        onSelectGenre(genreId);
+        setSelectedGenre(genreId); // Atualiza o gênero selecionado
+        onSelectGenre(genreId); // Chama a função de filtragem
     };
 
     return (
@@ -19,7 +23,7 @@ const GenreFilter = ({ onSelectGenre }) => {
                 {popularGenres.map((genre) => (
                     <button
                         key={genre.id}
-                        className="genre-button"
+                        className={`genre-button ${selectedGenre === genre.id ? "active" : ""}`}
                         onClick={() => handleGenreClick(genre.id)}
                     >
                         {genre.name}

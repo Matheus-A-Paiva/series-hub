@@ -10,7 +10,7 @@ const Header = ({ onSearch }) => {
                 <span className="logo-hub">Hub</span>
             </h1>
 
-            <SearchBar onSearch={onSearch} /> {/* 🔹 Agora recebe `onSearch` */}
+            <SearchBar onSearch={onSearch} />
         </header>
     );
 };

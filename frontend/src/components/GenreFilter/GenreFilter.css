@@ -31,9 +31,10 @@
     box-shadow: 0 4px 15px rgba(233, 69, 96, 0.6);
 }
 
-.genre-button:active {
-    background-color: #C70039;
-    box-shadow: 0 2px 5px rgba(199, 0, 57, 0.5);
+.genre-button.active {
+    background-color: #E94560;
+    box-shadow: 0 0 8px #E94560;
+    font-weight: bold;
 }
 
 @media (max-width: 768px) {

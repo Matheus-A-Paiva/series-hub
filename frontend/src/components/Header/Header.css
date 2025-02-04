@@ -11,10 +11,11 @@
     top: 0;
     left: 0;
     z-index: 1000;
+    transition: all 0.3s ease-in-out;
 }
 
 .logo {
-    font-size: 32px;
+    font-size: 2rem;
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
     text-transform: uppercase;
@@ -38,9 +39,21 @@
     text-shadow: 0 0 15px #66FCF1, 0 0 30px #a472f1;
 }
 
-
 .search-bar {
     flex-grow: 1;
     max-width: 400px;
     margin-left: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        padding: 10px 2px;
+        gap: 12px;
+    }
+
 }
