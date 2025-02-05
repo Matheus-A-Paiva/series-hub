@@ -1,9 +1,14 @@
 import React from "react";
 import SerieCard from "../SerieCard/SerieCard.jsx";
 import GenreFilter from "../GenreFilter/GenreFilter.jsx";
+import ReactPaginate from "react-paginate";
 import "./Home.css";
 
 const Home = ({ series, totalPages, currentPage, setCurrentPage, onSelectGenre }) => {
+    const handlePageClick = (data) => {
+        setCurrentPage(data.selected + 1);
+    };
+
     return (
         <div className="home-container">
             <h5 className="home-title">
@@ -19,21 +24,27 @@ const Home = ({ series, totalPages, currentPage, setCurrentPage, onSelectGenre }
                 )}
             </div>
 
-            <div className="pagination">
-                <button
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                >
-                    Previous Page
-                </button>
-                <span>Page {currentPage} of {totalPages}</span>
-                <button
-                    disabled={currentPage >= totalPages}
-                    onClick={() => setCurrentPage((prev) => prev + 1)}
-                >
-                    Next Page
-                </button>
-            </div>
+
+            <ReactPaginate
+                previousLabel={"«"}
+                nextLabel={"»"}
+                breakLabel={<span className="dots">...</span>}
+                pageCount={totalPages}
+                marginPagesDisplayed={1}
+                pageRangeDisplayed={3}
+                onPageChange={handlePageClick}
+                forcePage={currentPage - 1}
+                containerClassName={"pagination"}
+                pageClassName={"page-item"}
+                pageLinkClassName={"page-link"}
+                previousClassName={"prev-button"}
+                nextClassName={"next-button"}
+                activeClassName={"active-page"}
+                disabledClassName={"disabled"}
+                breakClassName={"dots"}
+                breakLinkClassName={"dots"}
+            />
+
         </div>
     );
 };

@@ -38,8 +38,10 @@ const SerieCard = ({ serie }) => {
             </div>
 
             <div className="info-container">
-                <h6 className="serie-title">{serie.name}</h6>
-                <p className="release-date"><strong>Release Date:</strong> {releaseDate}</p>
+                <h6 className="serie-title">
+                    {serie.name.length > 20 ? serie.name.slice(0, 20) + "..." : serie.name}
+                </h6>
+                <p className="release-date"> {releaseDate}</p>
 
                 <button className="toggle-button" onClick={() => setIsExpanded(!isExpanded)}>
                     {isExpanded ? <FaChevronUp /> : <FaChevronDown />}

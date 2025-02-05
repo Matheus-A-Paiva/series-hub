@@ -42,6 +42,7 @@ const HomePage = () => {
 
         setSearchActive(true);
         setCurrentPage(1);
+        setSelectedGenre(null);
 
         try {
             const data = await fetchSearchSeries(query, 1);
@@ -51,6 +52,7 @@ const HomePage = () => {
             console.error("Search failed:", error);
         }
     };
+
 
     const handleGenreChange = (genreId) => {
         setSearchActive(false);

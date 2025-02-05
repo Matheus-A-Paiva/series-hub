@@ -5,7 +5,7 @@ import "./Header.css";
 const Header = ({ onSearch }) => {
     return (
         <header className="header">
-            <h1 className="logo">
+            <h1 className="logo" onClick={() => window.location.reload()}>
                 <span className="logo-series">Series</span>
                 <span className="logo-hub">Hub</span>
             </h1>
