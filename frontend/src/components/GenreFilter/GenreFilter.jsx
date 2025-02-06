@@ -13,8 +13,8 @@ const GenreFilter = ({ onSelectGenre }) => {
     const [selectedGenre, setSelectedGenre] = useState(null);
 
     const handleGenreClick = (genreId) => {
-        setSelectedGenre(genreId); // Atualiza o gênero selecionado
-        onSelectGenre(genreId); // Chama a função de filtragem
+        setSelectedGenre(genreId);
+        onSelectGenre(genreId);
     };
 
     return (
