@@ -35,7 +35,6 @@ Check out the live project:
 
 - Laravel (PHP framework)
 - PHPUnit (unit and feature testing)
-- MySQL
 - Laravel Eloquent ORM
 - Laravel API Resource
 
@@ -62,7 +61,6 @@ Ensure you have the following installed:
 - **Laragon (recommended for easy Laravel setup) (Windows only)**
 - **PHP 8+**
 - **Composer**
-- **MySQL**
 - **Git**
 
 ### **Cloning the Repository**
