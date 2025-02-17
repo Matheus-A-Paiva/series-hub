@@ -37,6 +37,7 @@ Check out the live project:
 - PHPUnit (unit and feature testing)
 - Laravel Eloquent ORM
 - Laravel API Resource
+- Redis
 
 ---
 
