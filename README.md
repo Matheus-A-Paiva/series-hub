@@ -13,12 +13,6 @@ Series-Hub is a web platform that allows users to explore the highest-rated TV s
 
 The project is divided into frontend and backend, both deployed separately. The backend consumes an external RESTful API from **The Movie Database (TMDb)** and includes **unit and feature tests** to ensure code reliability.
 
-## 🚀 Live Demo
-
-Check out the live project:
-
--  [Series-Hub Live](https://series-hub-lime.vercel.app/)
-
 ---
 
 ## 💻 Technologies
